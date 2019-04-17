@@ -24,6 +24,14 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.get('/api/timestamp/:date_string?', (req, res) => {
+  const date = req.query.date_string
+  const validatedDate = new Date(date)
+  console.log(req.query)
+  // if (isNaN(date))
+  //   return res.json({"error" : "Invalid Date" })
+})
+
 
 
 // listen for requests :)
