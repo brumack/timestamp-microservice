@@ -26,10 +26,15 @@ app.get("/api/hello", function (req, res) {
 
 app.get('/api/timestamp/:date_string?', (req, res) => {
   const date = req.query.date_string
+  if (!date) 
+    return res.json({unix: Date.now(), utc: new Date().toUTCString()})
+  
   const validatedDate = new Date(date)
-  console.log(req.query)
-  // if (isNaN(date))
-  //   return res.json({"error" : "Invalid Date" })
+  
+  if (isNaN(date))
+    return res.json({"error" : "Invalid Date" })
+  
+  return res.json({unix: Date.parse(date), utc: new Date(date).toUTCString()})
 })
 
 
