@@ -25,13 +25,13 @@ app.get("/api/hello", function (req, res) {
 });
 
 app.get('/api/timestamp/:date_string?', (req, res) => {
-  const date = req.query.date_string
+  const date = req.params.date_string
   if (!date) 
     return res.json({unix: Date.now(), utc: new Date().toUTCString()})
   
   const validatedDate = new Date(date)
   
-  if (isNaN(date))
+  if (isNaN(validatedDate))
     return res.json({"error" : "Invalid Date" })
   
   return res.json({unix: Date.parse(date), utc: new Date(date).toUTCString()})
